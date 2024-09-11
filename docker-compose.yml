@@ -1,0 +1,22 @@
+version: "3.3"
+
+name: neuroparser-monitoring
+
+services:
+  loki:
+    image: grafana/loki:2.7.0
+    container_name: loki
+    network_mode: host
+    volumes:
+      - ./loki:/mnt/config
+  promtail:
+    image: grafana/promtail:2.7.0
+    container_name: promtail
+    network_mode: host
+    volumes:
+      - ./promtail/promtail-config.yaml:/etc/promtail/config.yml
+      - /path/to logs :/app/access.json
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    network_mode: host
